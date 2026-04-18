@@ -5,13 +5,12 @@ on:
     - cron: '10 0 * * *'  # 09:10 KST (UTC+9)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -35,15 +34,9 @@ jobs:
       - name: Build static site
         run: python build.py
 
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ dist/
-          git diff --staged --quiet || git commit -m "chore: daily rate update $(date +'%Y-%m-%d')"
-          git push
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          artifact_name: github-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          commit_message: "chore: daily rate update"
