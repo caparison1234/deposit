@@ -1,0 +1,229 @@
+{% extends "base.html.j2" %}
+
+{% block title %}예금하기 좋은 날 | 오늘의 CMA·파킹통장·단기채권 금리 랭킹{% endblock %}
+{% block meta_description %}오늘 가장 높은 CMA 금리, 파킹통장 금리, 단기채권 ETF 수익률을 한눈에 비교하세요.{% endblock %}
+
+{% block nav_home_active %}bg-secondary-container text-primary font-bold{% endblock %}
+{% block bottom_home_active %}text-primary{% endblock %}
+{% block bottom_home_icon %}icon-filled text-xl{% endblock %}
+{% block bottom_home_label %}font-bold{% endblock %}
+
+{% block content %}
+<main class="pt-24 max-w-2xl mx-auto">
+
+  <!-- Hero -->
+  <section class="px-6 mb-8">
+    <p class="text-tertiary font-bold text-xs tracking-widest mb-3">TODAY'S BEST RATE</p>
+    <div class="flex items-end justify-between gap-4">
+      <div class="flex-1">
+        <h1 class="text-2xl font-extrabold text-on-surface leading-tight tracking-tight">
+          오늘 가장 높은<br/>
+          <span class="text-primary">안전 자산 금리</span>는?
+        </h1>
+        <p class="text-sm text-on-surface-variant mt-2 font-medium">원금보장 추구 · 수시입출금 가능 상품 기준</p>
+      </div>
+      {% if cma_items %}
+      {% set best = cma_items[0] %}
+      <div class="text-right shrink-0">
+        <div class="text-5xl font-black text-primary tracking-tight leading-none">{{ best.rate }}<span class="text-2xl">%</span></div>
+        <p class="text-xs text-on-surface-variant mt-1 font-semibold">{{ best.name }}</p>
+        <div class="flex gap-1 justify-end mt-2 flex-wrap">
+          <span class="text-xs bg-surface-container px-2 py-1 rounded-full text-on-surface-variant font-medium">원금보장추구</span>
+          <span class="text-xs bg-surface-container px-2 py-1 rounded-full text-on-surface-variant font-medium">수시입출금</span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- 확정금리형 (deposit) -->
+  <section class="px-6 mb-2">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xs bg-surface-container-high text-on-surface-variant font-bold px-3 py-1 rounded-full">확정 금리형</span>
+        <span class="text-xs text-on-surface-variant">원금보장</span>
+      </div>
+      <a href="#" class="text-xs text-primary font-bold flex items-center gap-0.5">전체 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+    </div>
+
+    <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+      {% if deposit_items %}
+        {% for item in deposit_items[:3] %}
+        {% set loop_first = loop.first %}
+        <div class="flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% endif %}">
+          <span class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">{{ item.type | default('정기예금') }} · {{ item.protection | default('예금자보호') }}</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.rate }}<span class="text-sm font-bold">%</span></p>
+            {% if item.change is defined and item.change != 0 %}
+              {% if item.change > 0 %}
+              <p class="text-xs text-tertiary font-semibold">▲ {{ "%.2f"|format(item.change) }}%</p>
+              {% else %}
+              <p class="text-xs text-on-surface-variant font-semibold">▼ {{ "%.2f"|format(item.change | abs) }}%</p>
+              {% endif %}
+            {% else %}
+            <p class="text-xs text-on-surface-variant font-semibold">— 변동없음</p>
+            {% endif %}
+          </div>
+        </div>
+        {% if not loop.last %}<div class="h-px bg-outline-variant/20 mx-5"></div>{% endif %}
+        {% endfor %}
+      {% else %}
+        <!-- fallback placeholder rows -->
+        <div class="flex items-center px-5 py-4 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent">
+          <span class="text-xl font-black text-primary w-7 shrink-0">1</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">KB국민은행 파킹통장</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">정기예금 · 예금자보호</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-primary">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="flex items-center px-5 py-4">
+          <span class="text-xl font-black text-on-surface-variant w-7 shrink-0">2</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">신한은행 쏠편한 정기예금</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">정기예금 · 예금자보호</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="flex items-center px-5 py-4">
+          <span class="text-xl font-black text-on-surface-variant w-7 shrink-0">3</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">하나은행 하나원큐 정기예금</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">정기예금 · 예금자보호</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Ad Slot -->
+  <section class="px-6 my-6">
+    <div class="w-full h-24 bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40">
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- 시장금리형 (CMA) -->
+  <section class="px-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xs bg-surface-container-high text-on-surface-variant font-bold px-3 py-1 rounded-full">시장 금리형</span>
+        <span class="text-xs text-on-surface-variant">원금보장추구</span>
+      </div>
+      <a href="/cma/" class="text-xs text-primary font-bold flex items-center gap-0.5">전체 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+    </div>
+
+    <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+      {% if cma_items %}
+        {% for item in cma_items[:3] %}
+        {% set loop_first = loop.first %}
+        <div class="flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% endif %}">
+          <span class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">{{ item.type | default('CMA') }} · 수시입출금</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.rate }}<span class="text-sm font-bold">%</span></p>
+            {% if item.change is defined and item.change != 0 %}
+              {% if item.change > 0 %}
+              <p class="text-xs text-tertiary font-semibold">▲ {{ "%.2f"|format(item.change) }}%</p>
+              {% else %}
+              <p class="text-xs text-on-surface-variant font-semibold">▼ {{ "%.2f"|format(item.change | abs) }}%</p>
+              {% endif %}
+            {% else %}
+            <p class="text-xs text-on-surface-variant font-semibold">— 변동없음</p>
+            {% endif %}
+          </div>
+        </div>
+        {% if not loop.last %}<div class="h-px bg-outline-variant/20 mx-5"></div>{% endif %}
+        {% endfor %}
+      {% else %}
+        <!-- fallback placeholder rows -->
+        <div class="flex items-center px-5 py-4 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent">
+          <span class="text-xl font-black text-primary w-7 shrink-0">1</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">한국투자증권 CMA</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">발행어음형 · 수시입출금</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-primary">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="flex items-center px-5 py-4">
+          <span class="text-xl font-black text-on-surface-variant w-7 shrink-0">2</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">미래에셋증권 CMA</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">발행어음형 · 수시입출금</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="flex items-center px-5 py-4">
+          <span class="text-xl font-black text-on-surface-variant w-7 shrink-0">3</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">NH투자증권 CMA</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · 수시입출금</p>
+          </div>
+          <div class="text-right shrink-0 ml-3">
+            <p class="text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></p>
+            <p class="text-xs text-on-surface-variant font-semibold">데이터 수집 중</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="px-6 mb-6">
+    <a href="/cma/" class="block p-5 rounded-md bg-gradient-to-br from-primary to-primary-container text-white" style="box-shadow:0 8px 24px rgba(0,88,190,0.25);">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-black text-base">CMA 전체 금리 비교</p>
+          <p class="text-sm opacity-80 mt-0.5">{{ cma_items | length if cma_items else 8 }}개 증권사 실시간 랭킹 보기</p>
+        </div>
+        <span class="material-symbols-outlined text-3xl opacity-80">arrow_forward_ios</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="px-6 mb-4">
+    <div class="bg-surface-container-lowest rounded-DEFAULT px-5 py-4" style="box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <p class="text-xs text-on-surface-variant font-bold tracking-widest mb-3">데이터 출처</p>
+      <div class="flex flex-wrap gap-x-5 gap-y-2">
+        <span class="text-xs text-on-surface-variant font-semibold">금융감독원 금융상품공시</span>
+        <span class="text-xs text-on-surface-variant font-semibold">KOFIA 전자공시</span>
+        <span class="text-xs text-on-surface-variant font-semibold">KRX 정보데이터시스템</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="px-6 mb-4">
+    <p class="text-xs text-on-surface-variant/60 leading-relaxed">본 사이트의 금리 정보는 자동 수집된 참고 자료로, 투자 권유 또는 금융 상품 추천이 아닙니다. 실제 가입 전 각 금융사 공식 사이트를 반드시 확인하세요. © 2026 예금하기 좋은 날</p>
+  </section>
+
+</main>
+{% endblock %}

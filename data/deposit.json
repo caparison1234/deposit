@@ -1,0 +1,108 @@
+{
+  "updated_at": "2026-04-18",
+  "source": "금융감독원 금융상품비교공시",
+  "source_url": "https://finlife.fss.or.kr",
+  "items": [
+    {
+      "rank": 1,
+      "firm": "한국카카오은행",
+      "product_name": "카카오뱅크 정기예금",
+      "base_rate": 3.5,
+      "max_rate": 4.2,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "앱"
+    },
+    {
+      "rank": 2,
+      "firm": "케이뱅크",
+      "product_name": "코드K 정기예금",
+      "base_rate": 3.45,
+      "max_rate": 4.15,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "앱"
+    },
+    {
+      "rank": 3,
+      "firm": "토스뱅크",
+      "product_name": "토스뱅크 정기예금",
+      "base_rate": 3.4,
+      "max_rate": 4.1,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "앱"
+    },
+    {
+      "rank": 4,
+      "firm": "KB국민은행",
+      "product_name": "KB Star 정기예금",
+      "base_rate": 3.7,
+      "max_rate": 4.05,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 5,
+      "firm": "신한은행",
+      "product_name": "쏠편한 정기예금",
+      "base_rate": 3.65,
+      "max_rate": 4.0,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 6,
+      "firm": "하나은행",
+      "product_name": "하나의 정기예금",
+      "base_rate": 3.6,
+      "max_rate": 3.95,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 7,
+      "firm": "우리은행",
+      "product_name": "WON 정기예금",
+      "base_rate": 3.55,
+      "max_rate": 3.9,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 8,
+      "firm": "NH농협은행",
+      "product_name": "NH왈츠회전예금 II",
+      "base_rate": 3.5,
+      "max_rate": 3.85,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 9,
+      "firm": "IBK기업은행",
+      "product_name": "IBK D-Day 통장",
+      "base_rate": 3.45,
+      "max_rate": 3.8,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷/앱"
+    },
+    {
+      "rank": 10,
+      "firm": "SC제일은행",
+      "product_name": "e-그린세이브 예금",
+      "base_rate": 3.3,
+      "max_rate": 3.75,
+      "period_months": 12,
+      "protection": true,
+      "join_channel": "인터넷"
+    }
+  ],
+  "stale": true
+}

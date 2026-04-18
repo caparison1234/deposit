@@ -1,0 +1,72 @@
+{
+  "updated_at": "2026-04-18",
+  "source": "KOFIA 전자공시",
+  "source_url": "http://dis.kofia.or.kr",
+  "items": [
+    {
+      "rank": 1,
+      "firm": "한국투자증권",
+      "product_type": "발행어음형",
+      "rate": 4.35,
+      "change": 0.1,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 2,
+      "firm": "미래에셋증권",
+      "product_type": "RP형",
+      "rate": 4.2,
+      "change": 0.0,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 3,
+      "firm": "NH투자증권",
+      "product_type": "발행어음형",
+      "rate": 4.18,
+      "change": -0.05,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 4,
+      "firm": "KB증권",
+      "product_type": "RP형",
+      "rate": 4.15,
+      "change": 0.0,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 5,
+      "firm": "삼성증권",
+      "product_type": "RP형",
+      "rate": 4.1,
+      "change": 0.05,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 6,
+      "firm": "신한투자증권",
+      "product_type": "RP형",
+      "rate": 4.08,
+      "change": 0.0,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 7,
+      "firm": "키움증권",
+      "product_type": "RP형",
+      "rate": 4.05,
+      "change": 0.0,
+      "as_of": "2026-04-18"
+    },
+    {
+      "rank": 8,
+      "firm": "대신증권",
+      "product_type": "RP형",
+      "rate": 4.0,
+      "change": -0.05,
+      "as_of": "2026-04-18"
+    }
+  ],
+  "stale": true
+}

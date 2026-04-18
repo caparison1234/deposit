@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start *)",
+      "Bash(unzip -o stitch_friendly_korean_deposit_app.zip -d stitch_import/)",
+      "Bash(python scripts/collect_cma.py)",
+      "Bash(python scripts/collect_deposit.py)",
+      "Bash(python build.py)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

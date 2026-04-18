@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d9dade",
+                    "primary-container": "#2170e4",
+                    "inverse-surface": "#2e3134",
+                    "on-tertiary-fixed": "#410006",
+                    "on-surface-variant": "#424754",
+                    "surface-container-highest": "#e1e2e6",
+                    "surface": "#f8f9fd",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#adc6ff",
+                    "primary-fixed": "#d8e2ff",
+                    "on-background": "#191c1f",
+                    "secondary": "#495e8a",
+                    "on-secondary-container": "#405682",
+                    "on-secondary-fixed-variant": "#304671",
+                    "secondary-container": "#b6ccff",
+                    "on-primary-container": "#fefcff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#004395",
+                    "inverse-primary": "#adc6ff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-tertiary-container": "#fffbff",
+                    "outline": "#727785",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-variant": "#e1e2e6",
+                    "on-tertiary-fixed-variant": "#8c1520",
+                    "tertiary": "#aa2d32",
+                    "secondary-fixed-dim": "#b1c6f9",
+                    "primary": "#0058be",
+                    "surface-container-high": "#e7e8ec",
+                    "surface-container-low": "#f2f3f7",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#cc4548",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "outline-variant": "#c2c6d6",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1f",
+                    "tertiary-fixed": "#ffdad8",
+                    "inverse-on-surface": "#eff1f5",
+                    "surface-tint": "#005ac2",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001a42",
+                    "background": "#f8f9fd",
+                    "surface-bright": "#f8f9fd",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#edeef2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans", "Pretendard"],
+                    "body": ["Plus Jakarta Sans", "Pretendard"],
+                    "label": ["Plus Jakarta Sans", "Pretendard"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Pretendard', 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fd; color: #191c1f; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #0058be;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 88, 190, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f8f9fd]/80 backdrop-blur-md flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-600 cursor-pointer">menu</span>
+<h1 class="text-blue-600 font-black tracking-tight font-headline text-lg">예금하기 좋은 날</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="p-2 hover:bg-blue-50 transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined text-gray-400">notifications</span>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Editorial Header -->
+<div class="mb-10 space-y-2">
+<p class="text-tertiary font-bold text-sm tracking-wider">CALCULATOR</p>
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight leading-tight">
+                얼마나 모일까요? <br/>
+<span class="text-primary">목표 금액</span>을 확인해 보세요.
+            </h2>
+</div>
+<!-- Result Hero Section -->
+<section class="bg-surface-container-low rounded-lg p-8 mb-10 relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<p class="text-on-surface-variant font-medium mb-1">만기 시 수령액</p>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-4xl font-black text-primary font-headline">10,520,000</span>
+<span class="text-xl font-bold text-on-surface">원</span>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant/30 pt-6">
+<div>
+<p class="text-sm text-on-surface-variant mb-1">이자 수익 (세전)</p>
+<p class="text-lg font-bold text-on-surface">520,000원</p>
+</div>
+<div class="text-right">
+<p class="text-sm text-on-surface-variant mb-1">적용 금리</p>
+<p class="text-lg font-bold text-tertiary">연 5.2%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Input Section -->
+<div class="space-y-8">
+<!-- Deposit Amount -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<label class="text-sm font-bold text-on-surface-variant">예치 금액</label>
+<span class="text-xl font-bold text-on-surface">10,000,000원</span>
+</div>
+<div class="bg-surface-container-high p-4 rounded-DEFAULT">
+<input class="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" max="100000000" min="100000" step="100000" type="range" value="10000000"/>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant text-sm font-semibold rounded-full border border-outline-variant/15 hover:bg-primary hover:text-white transition-all">+10만</button>
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant text-sm font-semibold rounded-full border border-outline-variant/15 hover:bg-primary hover:text-white transition-all">+100만</button>
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant text-sm font-semibold rounded-full border border-outline-variant/15 hover:bg-primary hover:text-white transition-all">+500만</button>
+</div>
+</div>
+<!-- Period -->
+<div class="space-y-4">
+<label class="text-sm font-bold text-on-surface-variant">가입 기간</label>
+<div class="grid grid-cols-4 gap-3">
+<button class="py-3 px-2 bg-surface-container-lowest border border-outline-variant/20 rounded-DEFAULT text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-all">3개월</button>
+<button class="py-3 px-2 bg-surface-container-lowest border border-outline-variant/20 rounded-DEFAULT text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-all">6개월</button>
+<button class="py-3 px-2 bg-primary text-white rounded-DEFAULT font-bold text-sm shadow-lg shadow-primary/20">12개월</button>
+<button class="py-3 px-2 bg-surface-container-lowest border border-outline-variant/20 rounded-DEFAULT text-on-surface-variant font-bold text-sm hover:border-primary hover:text-primary transition-all">24개월</button>
+</div>
+</div>
+<!-- Interest Rate -->
+<div class="space-y-4">
+<label class="text-sm font-bold text-on-surface-variant">이자율 (연)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-DEFAULT py-4 px-6 text-xl font-bold text-on-surface focus:ring-2 focus:ring-primary/20 transition-all" placeholder="0.0" step="0.1" type="number" value="5.2"/>
+<span class="absolute right-6 top-1/2 -translate-y-1/2 text-xl font-bold text-primary">%</span>
+</div>
+</div>
+</div>
+<!-- Banner / CTA -->
+<div class="mt-12 p-6 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary-container shadow-xl shadow-primary/20">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-lg font-bold mb-1">내게 맞는 최고의 예금은?</h3>
+<p class="text-sm opacity-90">금리 비교하고 최대 혜택 받기</p>
+</div>
+<span class="material-symbols-outlined text-3xl">arrow_forward_ios</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 bg-white/90 backdrop-blur-xl rounded-t-[2.5rem] shadow-[0_-8px_30px_rgba(59,130,246,0.08)]">
+<div class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Plus_Jakarta_Sans','Pretendard'] text-[11px] font-medium">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-['Plus_Jakarta_Sans','Pretendard'] text-[11px] font-medium">금리비교</span>
+</div>
+<div class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 font-bold bg-blue-50 dark:bg-blue-900/30 rounded-2xl px-4 py-2 cursor-pointer active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1">calculate</span>
+<span class="font-['Plus_Jakarta_Sans','Pretendard'] text-[11px] font-bold">계산기</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-blue-500 transition-all cursor-pointer">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Plus_Jakarta_Sans','Pretendard'] text-[11px] font-medium">내 정보</span>
+</div>
+</nav>
+</body></html>

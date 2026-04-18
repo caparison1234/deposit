@@ -1,0 +1,265 @@
+{% extends "base.html.j2" %}
+
+{% block title %}CMA 금리 비교 | 예금하기 좋은 날{% endblock %}
+{% block meta_description %}오늘 기준 증권사 CMA 금리 비교. 발행어음형·RP형 금리 랭킹을 한눈에 확인하세요.{% endblock %}
+
+{% block nav_cma_active %}bg-secondary-container text-primary font-bold{% endblock %}
+{% block bottom_cma_active %}text-primary{% endblock %}
+{% block bottom_cma_icon %}icon-filled text-xl{% endblock %}
+{% block bottom_cma_label %}font-bold{% endblock %}
+
+{% block content %}
+<main class="pt-20 max-w-2xl mx-auto">
+
+  <!-- Breadcrumb -->
+  <div class="px-6 pt-3 pb-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+    <a href="/" class="hover:text-primary transition-colors font-medium">홈</a>
+    <span class="material-symbols-outlined text-sm">chevron_right</span>
+    <span class="text-on-surface font-semibold">CMA 금리 비교</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="px-6 pt-4 pb-6">
+    <p class="text-tertiary font-bold text-xs tracking-widest mb-2">CMA RATE RANKING</p>
+    <h1 class="text-2xl font-extrabold text-on-surface leading-tight tracking-tight mb-1">
+      증권사 CMA 금리 비교
+    </h1>
+    <p class="text-sm text-on-surface-variant font-medium mb-5">{{ updated_at }} 기준 · {{ cma_items | length if cma_items else 0 }}개 증권사</p>
+
+    <!-- Filter Tabs -->
+    <div class="flex gap-2">
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-primary text-white" data-filter="all">전체</button>
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-filter="bill">발행어음형</button>
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-filter="rp">RP형</button>
+    </div>
+  </section>
+
+  <!-- Rate Table -->
+  <section class="px-6 mb-6">
+    <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+
+      <!-- Header Row -->
+      <div class="flex items-center px-5 py-3 bg-surface-container-low">
+        <span class="w-7 shrink-0 text-xs font-bold text-on-surface-variant">순위</span>
+        <span class="flex-1 ml-3 text-xs font-bold text-on-surface-variant">금융사</span>
+        <span class="w-14 text-right text-xs font-bold text-on-surface-variant">금리</span>
+        <span class="w-16 text-right text-xs font-bold text-on-surface-variant ml-2 hidden sm:block">유형</span>
+      </div>
+
+      {% if cma_items %}
+        {% for item in cma_items %}
+        {% set loop_first = loop.first %}
+        {% set row_type = item.cma_type | default('rp') %}
+        {% set is_bill = row_type in ['bill', '발행어음', '발행어음형'] %}
+        <div class="rate-row flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% elif loop.index is odd %}bg-[#f9fafb]{% else %}bg-surface-container-lowest{% endif %}"
+             data-type="{{ 'bill' if is_bill else 'rp' }}">
+          <span class="text-lg font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">
+              {{ '발행어음형' if is_bill else 'RP형' }} ·
+              {% if item.change is defined and item.change != 0 %}
+                {% if item.change > 0 %}
+                <span class="text-tertiary font-semibold">▲ {{ "%.2f"|format(item.change) }}%</span>
+                {% else %}
+                <span class="text-outline font-semibold">▼ {{ "%.2f"|format(item.change | abs) }}%</span>
+                {% endif %}
+              {% else %}
+                <span class="font-semibold">— 변동없음</span>
+              {% endif %}
+            </p>
+          </div>
+          <span class="w-14 text-right text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.rate }}<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block">
+            {% if is_bill %}
+            <span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span>
+            {% else %}
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span>
+            {% endif %}
+          </span>
+        </div>
+        {% if not loop.last %}<div class="h-px bg-outline-variant/20 mx-5"></div>{% endif %}
+        {% endfor %}
+      {% else %}
+        <!-- Static fallback when no data collected yet -->
+        <div class="rate-row flex items-center px-5 py-4 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent" data-type="bill">
+          <span class="text-lg font-black text-primary w-7 shrink-0">1</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">한국투자증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">발행어음형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-primary">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-surface-container-lowest" data-type="bill">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">2</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">미래에셋증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">발행어음형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-[#f9fafb]" data-type="rp">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">3</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">NH투자증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-surface-container-lowest" data-type="bill">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">4</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">KB증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">발행어음형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-[#f9fafb]" data-type="rp">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">5</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">삼성증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-surface-container-lowest" data-type="rp">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">6</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">신한투자증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-[#f9fafb]" data-type="rp">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">7</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">키움증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span></span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        <div class="rate-row flex items-center px-5 py-4 bg-surface-container-lowest" data-type="rp">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">8</span>
+          <div class="flex-1 min-w-0 ml-3">
+            <p class="font-bold text-on-surface text-sm">대신증권</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">RP형 · <span class="font-semibold">데이터 수집 중</span></p>
+          </div>
+          <span class="w-14 text-right text-xl font-black text-on-surface">—<span class="text-sm font-bold">%</span></span>
+          <span class="w-16 text-right ml-2 hidden sm:block"><span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span></span>
+        </div>
+      {% endif %}
+
+      <!-- Table footnote -->
+      <div class="px-5 py-3 bg-surface-container-low">
+        <p class="text-xs text-on-surface-variant">* 금리는 세전 연이율 기준이며, 실제 수익률은 과세 후 달라질 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Slot -->
+  <section class="px-6 mb-6">
+    <div class="w-full h-24 bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40">
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- Accordion: Concept Explanation -->
+  <section class="px-6 mb-6">
+    <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">상품 유형 안내</p>
+    <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+
+      <button class="accordion-trigger w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)">
+        <div>
+          <p class="font-bold text-on-surface text-sm">발행어음형이란?</p>
+          <p class="text-xs text-on-surface-variant mt-0.5">증권사가 직접 발행하는 단기 채무증권</p>
+        </div>
+        <span class="material-symbols-outlined text-on-surface-variant chevron ml-3">expand_more</span>
+      </button>
+      <div class="accordion-body px-5 pb-0">
+        <div class="pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-4">
+          증권사가 자체 신용으로 발행하는 만기 1년 이내 단기 채무증권입니다. 예금자보호법 적용 대상은 아니지만, 발행 증권사의 자체 상환 능력을 기반으로 하며 은행 예금에 준하는 안정성을 추구합니다. 현재 <strong class="text-on-surface">한국투자증권, 미래에셋증권, KB증권</strong> 등 인가 증권사만 발행 가능합니다.
+        </div>
+      </div>
+
+      <div class="h-px bg-outline-variant/20 mx-5"></div>
+
+      <button class="accordion-trigger w-full flex items-center justify-between px-5 py-4 text-left" onclick="toggleAccordion(this)">
+        <div>
+          <p class="font-bold text-on-surface text-sm">RP형이란?</p>
+          <p class="text-xs text-on-surface-variant mt-0.5">환매조건부 채권 매수 방식</p>
+        </div>
+        <span class="material-symbols-outlined text-on-surface-variant chevron ml-3">expand_more</span>
+      </button>
+      <div class="accordion-body px-5 pb-0">
+        <div class="pb-5 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/20 pt-4">
+          증권사가 보유한 국채·통안채 등 우량 채권을 고객에게 팔고, 일정 기간 후 되사는 조건으로 운용하는 방식입니다. 기초 자산이 국채이므로 상대적으로 안전하나 예금자보호는 적용되지 않습니다. 발행어음형보다 금리가 소폭 낮은 경향이 있습니다.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="px-6 mb-6">
+    <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">관련 금리 보기</p>
+    <div class="grid grid-cols-2 gap-3">
+      <a href="#" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <span>파킹통장 금리</span>
+        <span class="material-symbols-outlined text-primary text-lg">chevron_right</span>
+      </a>
+      <a href="#" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <span>발행어음 금리</span>
+        <span class="material-symbols-outlined text-primary text-lg">chevron_right</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="px-6 mb-4">
+    <p class="text-xs text-on-surface-variant/60 leading-relaxed">본 사이트의 금리 정보는 자동 수집된 참고 자료로, 투자 권유 또는 금융 상품 추천이 아닙니다. 실제 가입 전 각 금융사 공식 사이트를 반드시 확인하세요. © 2026 예금하기 좋은 날</p>
+  </section>
+
+</main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const rows = document.querySelectorAll('.rate-row');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-white');
+        t.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      tab.classList.add('bg-primary', 'text-white');
+      tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+      const filter = tab.dataset.filter;
+      let rank = 1;
+      rows.forEach(row => {
+        const show = filter === 'all' || row.dataset.type === filter;
+        row.style.display = show ? 'flex' : 'none';
+        if (show) {
+          row.querySelector('span:first-child').textContent = rank++;
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}
