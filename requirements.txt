@@ -2,6 +2,4 @@ requests>=2.31,<3
 pandas>=2.0,<3
 beautifulsoup4>=4.12,<5
 lxml>=4.9,<6
-FinanceDataReader>=0.9
-pykrx>=1.0,<2
 Jinja2>=3.1,<4
