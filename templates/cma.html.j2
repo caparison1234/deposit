@@ -49,13 +49,13 @@
       {% if cma_items %}
         {% for item in cma_items %}
         {% set loop_first = loop.first %}
-        {% set row_type = item.cma_type | default('rp') %}
+        {% set row_type = item.product_type | default('RP형') %}
         {% set is_bill = row_type in ['bill', '발행어음', '발행어음형'] %}
         <div class="rate-row flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% elif loop.index is odd %}bg-[#f9fafb]{% else %}bg-surface-container-lowest{% endif %}"
              data-type="{{ 'bill' if is_bill else 'rp' }}">
           <span class="text-lg font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
+            <p class="font-bold text-on-surface text-sm">{{ item.firm }}</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               {{ '발행어음형' if is_bill else 'RP형' }} ·
               {% if item.change is defined and item.change != 0 %}

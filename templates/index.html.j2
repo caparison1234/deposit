@@ -43,7 +43,7 @@
         <span class="text-xs bg-surface-container-high text-on-surface-variant font-bold px-3 py-1 rounded-full">확정 금리형</span>
         <span class="text-xs text-on-surface-variant">원금보장</span>
       </div>
-      <a href="#" class="text-xs text-primary font-bold flex items-center gap-0.5">전체 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
+      <a href="/deposit/" class="text-xs text-primary font-bold flex items-center gap-0.5">전체 보기<span class="material-symbols-outlined text-sm">chevron_right</span></a>
     </div>
 
     <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
@@ -53,11 +53,11 @@
         <div class="flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% endif %}">
           <span class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
+            <p class="font-bold text-on-surface text-sm">{{ item.product_name }}</p>
             <p class="text-xs text-on-surface-variant mt-0.5">{{ item.type | default('정기예금') }} · {{ item.protection | default('예금자보호') }}</p>
           </div>
           <div class="text-right shrink-0 ml-3">
-            <p class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.rate }}<span class="text-sm font-bold">%</span></p>
+            <p class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.max_rate }}<span class="text-sm font-bold">%</span></p>
             {% if item.change is defined and item.change != 0 %}
               {% if item.change > 0 %}
               <p class="text-xs text-tertiary font-semibold">▲ {{ "%.2f"|format(item.change) }}%</p>
@@ -136,8 +136,8 @@
         <div class="flex items-center px-5 py-4 {% if loop_first %}border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent{% endif %}">
           <span class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface-variant{% endif %} w-7 shrink-0">{{ loop.index }}</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm">{{ item.name }}</p>
-            <p class="text-xs text-on-surface-variant mt-0.5">{{ item.type | default('CMA') }} · 수시입출금</p>
+            <p class="font-bold text-on-surface text-sm">{{ item.firm }}</p>
+            <p class="text-xs text-on-surface-variant mt-0.5">{{ item.product_type | default('CMA') }} · 수시입출금</p>
           </div>
           <div class="text-right shrink-0 ml-3">
             <p class="text-xl font-black {% if loop_first %}text-primary{% else %}text-on-surface{% endif %}">{{ item.rate }}<span class="text-sm font-bold">%</span></p>

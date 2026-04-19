@@ -1,0 +1,120 @@
+=== 예금하기 좋은 날 QC 리포트 (2026-04-19) ===
+
+[CRITICAL] 즉시 수정 필요
+
+- [빌드/렌더링] index.html.j2 필드명 불일치 — CMA 섹션: item.name 참조, cma.json 실제 키는 'firm'.
+  결과: dist/index.html의 "시장금리형" 카드 6개 상품명이 모두 공백으로 렌더링됨.
+  파일: D:\deposit\templates\index.html.j2 (line 29, 139)
+  수정: {{ item.name }} → {{ item.firm }}
+
+- [빌드/렌더링] index.html.j2 필드명 불일치 — 예금 섹션: item.name / item.rate 참조,
+  deposit.json 실제 키는 'product_name' / 'max_rate'.
+  결과: dist/index.html의 "확정금리형" 카드 3개 상품명·금리가 모두 공백으로 렌더링됨.
+  파일: D:\deposit\templates\index.html.j2 (line 56, 60)
+  수정: item.name → item.product_name, item.rate → item.max_rate
+
+- [빌드/렌더링] cma.html.j2 필드명 불일치 — item.name 참조, cma.json 실제 키는 'firm'.
+  결과: dist/cma/index.html 금리 테이블 8행 상품명 열이 모두 공백.
+  파일: D:\deposit\templates\cma.html.j2 (line 58)
+  수정: {{ item.name }} → {{ item.firm }}
+
+- [빌드/렌더링] cma.html.j2 필드명 불일치 — item.cma_type 참조, cma.json 실제 키는 'product_type'.
+  결과: 발행어음형/RP형 필터 data-type 속성과 뱃지가 모두 기본값('rp')으로 고정 — 발행어음형 탭 필터 동작 불가.
+  파일: D:\deposit\templates\cma.html.j2 (line 52, 53)
+  수정: item.cma_type → item.product_type
+
+- [데이터] parking.json 파일 없음 — data/parking.json이 존재하지 않음.
+  결과: parking_items = 0 rows, dist/parking/index.html 전체가 "데이터 수집 중" 플레이스홀더 상태.
+  수정: collect_parking.py 실행 후 data/parking.json 커밋 필요.
+
+- [데이터] etf.json 파일 없음 — data/etf.json이 존재하지 않음.
+  결과: etf_items = 0 rows, dist/etf/index.html 전체가 "데이터 수집 중" 플레이스홀더 상태.
+  수정: collect_etf.py 실행 후 data/etf.json 커밋 필요.
+
+- [빌드/렌더링] parking.html.j2 필드명 불일치 — item.bank_type 참조, collect_parking.py 출력 스키마에 'bank_type' 키 없음.
+  결과: parking 페이지의 "전체/시중은행/인터넷은행/저축은행" 탭 필터가 data-type 분류 없이 모두 단일 타입으로 렌더링됨.
+  파일: D:\deposit\templates\parking.html.j2
+  수정: collect_parking.py 출력에 'bank_type' 필드 추가 또는 템플릿 기본값 처리 보완.
+
+- [sitemap] SITE_URL 플레이스홀더 미교체 — dist/sitemap.xml 전체 URL이 'https://example.github.io'로 생성됨.
+  결과: Google Search Console 제출 시 잘못된 URL이 색인됨.
+  파일: D:\deposit\build.py (line 23): SITE_URL = "https://example.github.io"
+  수정: 실제 GitHub Pages URL로 교체 (예: https://caparison1234.github.io/deposit).
+
+- [robots.txt] SITE_URL 플레이스홀더 — dist/robots.txt의 Sitemap 줄이 example.github.io를 가리킴.
+  수정: SITE_URL 수정 시 자동 해결.
+
+[WARNING] 수정 권장
+
+- [HTML/네비게이션] dist/index.html "확정 금리형" 섹션의 "전체 보기" 링크가 href="#" (미구현).
+  예금 상세 페이지(/deposit/)가 dist에 존재하므로 링크를 /deposit/으로 교체해야 함.
+  파일: D:\deposit\templates\index.html.j2 (line 46)
+
+- [HTML/네비게이션] dist/index.html 하단 Bottom Nav에 "계산기", "가이드" 항목이 href="#" (미구현).
+  파일: D:\deposit\dist\index.html (line 304, 308)
+
+- [데이터] cma.json, deposit.json의 updated_at이 2026-04-18 — 오늘(2026-04-19) 기준 1일 경과, stale:true 플래그 설정됨.
+  수집 스크립트가 오늘 실행되지 않았음. CI 스케줄 또는 수동 실행 필요.
+
+- [SEO] dist/index.html meta description 길이 50자 — 권장 범위 120~160자에 크게 미달.
+  현재: "오늘 가장 높은 CMA 금리, 파킹통장 금리, 단기채권 ETF 수익률을 한눈에 비교하세요."
+  파일: D:\deposit\templates\index.html.j2
+  수정: 키워드를 포함한 120자 이상 설명으로 확장.
+
+- [SEO] dist/cma/index.html meta description 길이 48자 — 권장 범위 120~160자 미달.
+  현재: "오늘 기준 증권사 CMA 금리 비교. 발행어음형·RP형 금리 랭킹을 한눈에 확인하세요."
+  파일: D:\deposit\templates\cma.html.j2
+
+- [SEO] dist/index.html, dist/cma/index.html — <link rel="canonical"> 태그 없음.
+  product-spec 섹션 3-5 요구사항 미충족. 중복 색인 위험.
+  파일: D:\deposit\templates\base.html.j2 에 canonical 블록 추가 필요.
+
+- [SEO] 전체 페이지 — <meta property="og:site_name"> 등 Open Graph 태그 없음.
+  product-spec 섹션 3-5 요구사항 미충족.
+  파일: D:\deposit\templates\base.html.j2
+
+- [SEO] dist/index.html, dist/cma/index.html — JSON-LD 구조화 데이터 없음.
+  (dist/parking, dist/etf, dist/deposit에는 존재함. 홈·CMA만 누락.)
+  파일: D:\deposit\templates\index.html.j2, cma.html.j2
+
+- [CI] .github/workflows/daily-update.yml — 데이터 변경 여부 확인 없이 항상 배포.
+  데이터가 바뀌지 않아도 peaceiris/actions-gh-pages가 매일 gh-pages 브랜치에 커밋을 생성함.
+  수정: git diff --quiet data/ 체크 후 빌드·배포 단계를 조건부 실행하거나,
+        peaceiris action의 commit_message에 [skip ci] 조건 추가.
+
+- [requirements.txt] FinanceDataReader>=0.9 — 상한 버전 미지정. 메이저 버전 업 시 호환성 파손 위험.
+  현재: FinanceDataReader>=0.9
+  수정: FinanceDataReader>=0.9,<2 (또는 최신 안정 버전 확인 후 상한 지정)
+
+- [requirements.txt] pykrx>=1.0 — 상한 버전 미지정. 동일 이슈.
+  수정: pykrx>=1.0,<2
+
+[INFO] 참고 사항
+
+- build.py 빌드는 에러 없이 정상 종료됨 (exit 0). 출력 파일 수: 10.
+- parking.json / etf.json 미존재 시 build.py는 빈 리스트로 처리하며 에러 없이 진행함 (의도된 동작).
+- dist/ 하위 모든 HTML 파일에 Jinja2 잔재({{ / {%) 없음 — 렌더링 자체는 정상 완료.
+- dist/parking/index.html, dist/etf/index.html, dist/deposit/index.html에는
+  #ad-top, #ad-mid div와 JSON-LD가 정상 존재함.
+- dist/index.html, dist/cma/index.html에는 #ad-top, #ad-mid div가 없음
+  (product-spec 슬롯 A/B 요구사항 중 홈·CMA 페이지 미구현 상태).
+- CI 워크플로가 참조하는 스크립트 4개(collect_cma.py, collect_deposit.py, collect_parking.py,
+  collect_etf.py) 모두 scripts/ 디렉터리에 실제로 존재함 — 경로 불일치 없음.
+- sitemap.xml에 <changefreq>, <priority> 태그 없음 — product-spec 섹션 4-4 요구사항 미반영.
+
+=== 미구현 페이지 (product-spec 대비) ===
+
+product-spec.md 섹션 1 사이트맵 기준 dist/에 없는 페이지:
+
+P1 (v1):
+- /mmf/        MMF 금리 비교 (templates/mmf.html.j2 없음, data/mmf.json 없음)
+- /ima/        IMA 안내 페이지 (templates/ima.html.j2 없음, data/ima.json 없음)
+- /bill/       발행어음 금리 비교 (templates/bill.html.j2 없음, data/bill.json 없음)
+
+P2 (v2):
+- /guide/safe-assets/     안전 자산 가이드
+- /guide/cma-vs-parking/  CMA vs 파킹통장 비교
+- /guide/etf-kofr/        KOFR ETF 완전 가이드
+
+=== 요약 ===
+CRITICAL: 9건 / WARNING: 9건 / INFO: 7건

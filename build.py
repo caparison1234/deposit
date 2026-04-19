@@ -20,7 +20,7 @@ ASSETS_SRC = ROOT / "assets"
 ASSETS_DST = DIST / "assets"
 DATA_DIR = ROOT / "data"
 
-SITE_URL = "https://example.github.io"  # update to real Pages URL when known
+SITE_URL = "https://caparison1234.github.io/deposit"
 
 # ---------------------------------------------------------------------------
 # Helpers
