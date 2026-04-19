@@ -1,0 +1,203 @@
+{% extends "base.html.j2" %}
+
+{% block title %}단기채권 ETF 시세 | KOFR·CD금리 ETF | 예금하기 좋은 날{% endblock %}
+{% block nav_etf_active %}bg-secondary-container text-primary font-bold{% endblock %}
+{% block meta_description %}KODEX KOFR, TIGER CD금리 등 파킹형 단기채권 ETF 시세와 등락률을 매일 업데이트합니다. CMA 금리, 파킹통장 금리와 함께 비교하세요.{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "홈", "item": "/"},
+    {"@type": "ListItem", "position": 2, "name": "단기채권 ETF 시세", "item": "/etf/"}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="pt-20 max-w-2xl mx-auto">
+
+  <!-- Breadcrumb -->
+  <div class="px-6 pt-3 pb-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+    <a href="/" class="hover:text-primary transition-colors font-medium">홈</a>
+    <span class="material-symbols-outlined text-sm">chevron_right</span>
+    <span class="text-on-surface font-semibold">단기채권 ETF 시세</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="px-6 pt-4 pb-6">
+    <p class="text-tertiary font-bold text-xs tracking-widest mb-2">SHORT-TERM BOND ETF</p>
+    <h1 class="text-2xl font-extrabold text-on-surface leading-tight tracking-tight mb-1">
+      단기채권 ETF 시세
+    </h1>
+    <p class="text-sm text-on-surface-variant font-medium">{{ updated_at }} 기준 · {{ etf_items | length if etf_items else 0 }}개 종목</p>
+  </section>
+
+  <!-- Notice Box -->
+  <section class="px-6 mb-6">
+    <div class="flex gap-3 bg-surface-container border-l-4 border-tertiary rounded-DEFAULT px-4 py-4">
+      <span class="material-symbols-outlined text-tertiary text-lg shrink-0 mt-0.5">warning</span>
+      <p class="text-xs text-on-surface-variant leading-relaxed font-medium">ETF는 원금보장 상품이 아니며, 증권사 앱에서 시장가 매수 가능합니다. 시장가 매수 시 슬리피지가 발생할 수 있으며, 환매 시 당일 기준가로 처리됩니다.</p>
+    </div>
+  </section>
+
+  <!-- Ad Slot Top -->
+  <section class="px-6 mb-6">
+    <div id="ad-top" class="ad-slot w-full min-h-[90px] bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40" data-slot="slot-top">
+      <!-- Adsense slot-top: insert data-ad-client / data-ad-slot here -->
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- ETF Card Grid -->
+  <section class="px-6 mb-6">
+    <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">ETF 시세 현황</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      {% if etf_items %}
+        {% for item in etf_items %}
+        {% set is_up = item.change is defined and item.change > 0 %}
+        {% set is_down = item.change is defined and item.change < 0 %}
+        <div class="bg-surface-container-lowest rounded-md px-5 py-5 {% if loop.first %}ring-2 ring-primary/30{% endif %}" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+          <div class="flex items-start justify-between mb-3">
+            <div class="flex-1 min-w-0">
+              <p class="font-black text-on-surface text-sm leading-tight">{{ item.name }}</p>
+              <p class="text-xs text-on-surface-variant mt-0.5 font-semibold">{{ item.ticker }}</p>
+            </div>
+            {% if loop.first %}
+            <span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full ml-2 shrink-0">최고수익</span>
+            {% endif %}
+          </div>
+
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-3xl font-black text-on-surface tracking-tight">{{ "{:,}".format(item.close | int) if item.close else '—' }}<span class="text-sm font-bold ml-1">원</span></p>
+              <p class="text-xs text-on-surface-variant mt-1 font-medium">{{ item.as_of | default('') }} 기준</p>
+            </div>
+            <div class="text-right">
+              {% if is_up %}
+              <p class="text-lg font-black text-tertiary">▲ {{ "{:,}".format(item.change | int) if item.change else '—' }}</p>
+              <p class="text-xs font-bold text-tertiary">+{{ "%.2f"|format(item.change_pct) if item.change_pct is defined else '—' }}%</p>
+              {% elif is_down %}
+              <p class="text-lg font-black text-outline">▼ {{ "{:,}".format(item.change | abs | int) if item.change else '—' }}</p>
+              <p class="text-xs font-bold text-outline">{{ "%.2f"|format(item.change_pct) if item.change_pct is defined else '—' }}%</p>
+              {% else %}
+              <p class="text-lg font-black text-on-surface-variant">—</p>
+              <p class="text-xs font-bold text-on-surface-variant">변동없음</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <!-- Static fallback when no data collected yet -->
+        <div class="bg-surface-container-lowest rounded-md px-5 py-5 ring-2 ring-primary/30" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="font-black text-on-surface text-sm">KODEX KOFR금리액티브(합성)</p>
+              <p class="text-xs text-on-surface-variant mt-0.5 font-semibold">449170</p>
+            </div>
+            <span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full ml-2 shrink-0">최고수익</span>
+          </div>
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-3xl font-black text-on-surface">—<span class="text-sm font-bold ml-1">원</span></p>
+              <p class="text-xs text-on-surface-variant mt-1 font-medium">데이터 수집 중</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-black text-on-surface-variant">—</p>
+              <p class="text-xs font-bold text-on-surface-variant">—%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-md px-5 py-5" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="font-black text-on-surface text-sm">TIGER CD금리투자KIS(합성)</p>
+              <p class="text-xs text-on-surface-variant mt-0.5 font-semibold">453850</p>
+            </div>
+          </div>
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-3xl font-black text-on-surface">—<span class="text-sm font-bold ml-1">원</span></p>
+              <p class="text-xs text-on-surface-variant mt-1 font-medium">데이터 수집 중</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-black text-on-surface-variant">—</p>
+              <p class="text-xs font-bold text-on-surface-variant">—%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-md px-5 py-5" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="font-black text-on-surface text-sm">KODEX CD금리액티브(합성)</p>
+              <p class="text-xs text-on-surface-variant mt-0.5 font-semibold">461980</p>
+            </div>
+          </div>
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-3xl font-black text-on-surface">—<span class="text-sm font-bold ml-1">원</span></p>
+              <p class="text-xs text-on-surface-variant mt-1 font-medium">데이터 수집 중</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-black text-on-surface-variant">—</p>
+              <p class="text-xs font-bold text-on-surface-variant">—%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-md px-5 py-5" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <p class="font-black text-on-surface text-sm">KBSTAR 머니마켓액티브</p>
+              <p class="text-xs text-on-surface-variant mt-0.5 font-semibold">494030</p>
+            </div>
+          </div>
+          <div class="flex items-end justify-between">
+            <div>
+              <p class="text-3xl font-black text-on-surface">—<span class="text-sm font-bold ml-1">원</span></p>
+              <p class="text-xs text-on-surface-variant mt-1 font-medium">데이터 수집 중</p>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-black text-on-surface-variant">—</p>
+              <p class="text-xs font-bold text-on-surface-variant">—%</p>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+  <!-- Ad Slot Mid -->
+  <section class="px-6 mb-6">
+    <div id="ad-mid" class="ad-slot w-full min-h-[250px] bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40" data-slot="slot-mid">
+      <!-- Adsense slot-mid: insert data-ad-client / data-ad-slot here -->
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="px-6 mb-6">
+    <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">관련 자료</p>
+    <div class="grid grid-cols-1 gap-3">
+      <div class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 text-sm" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <span class="font-bold text-on-surface-variant">KOFR ETF 투자 가이드</span>
+        <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">준비중</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="px-6 mb-4">
+    <p class="text-xs text-on-surface-variant/60 leading-relaxed">본 사이트의 ETF 시세 정보는 자동 수집된 참고 자료로, 투자 권유 또는 금융 상품 추천이 아닙니다. ETF는 원금보장 상품이 아닙니다. 실제 투자 전 각 운용사 및 증권사 공식 정보를 반드시 확인하세요. © 2026 예금하기 좋은 날</p>
+  </section>
+
+</main>
+{% endblock %}

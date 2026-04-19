@@ -33,6 +33,14 @@ jobs:
         run: python scripts/collect_deposit.py
         continue-on-error: true
 
+      - name: Collect parking rates
+        run: python scripts/collect_parking.py
+        continue-on-error: true
+
+      - name: Collect ETF prices
+        run: python scripts/collect_etf.py
+        continue-on-error: true
+
       - name: Build static site
         run: python build.py
 

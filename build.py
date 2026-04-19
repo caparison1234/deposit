@@ -76,8 +76,13 @@ def build() -> None:
     # 2. Load data
     cma_items = load_json(DATA_DIR / "cma.json")
     deposit_items = load_json(DATA_DIR / "deposit.json")
+    parking_items = load_json(DATA_DIR / "parking.json")
+    etf_items = load_json(DATA_DIR / "etf.json")
     updated_at = kst_now()
-    print(f"  data      cma={len(cma_items)} rows, deposit={len(deposit_items)} rows")
+    print(
+        f"  data      cma={len(cma_items)} rows, deposit={len(deposit_items)} rows, "
+        f"parking={len(parking_items)} rows, etf={len(etf_items)} rows"
+    )
 
     # 3. Jinja2 environment
     env = Environment(
@@ -99,8 +104,26 @@ def build() -> None:
         cma_items=cma_items,
     )
 
+    render(
+        env, "parking.html.j2", DIST / "parking" / "index.html",
+        updated_at=updated_at,
+        parking_items=parking_items,
+    )
+
+    render(
+        env, "etf.html.j2", DIST / "etf" / "index.html",
+        updated_at=updated_at,
+        etf_items=etf_items,
+    )
+
+    render(
+        env, "deposit.html.j2", DIST / "deposit" / "index.html",
+        updated_at=updated_at,
+        deposit_items=deposit_items,
+    )
+
     # 5. sitemap.xml
-    pages = ["", "cma/"]
+    pages = ["", "cma/", "parking/", "etf/", "deposit/"]
     sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>',
                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
