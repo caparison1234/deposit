@@ -26,7 +26,7 @@
 
   <!-- Breadcrumb -->
   <div class="px-6 pt-3 pb-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
-    <a href="/" class="hover:text-primary transition-colors font-medium">홈</a>
+    <a href="{{ site_root }}/" class="hover:text-primary transition-colors font-medium">홈</a>
     <span class="material-symbols-outlined text-sm">chevron_right</span>
     <span class="text-on-surface font-semibold">파킹통장 금리 비교</span>
   </div>
@@ -198,11 +198,11 @@
   <section class="px-6 mb-6">
     <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">관련 금리 보기</p>
     <div class="grid grid-cols-2 gap-3">
-      <a href="/cma/" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+      <a href="{{ site_root }}/cma/" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
         <span>CMA 금리와 비교하기</span>
         <span class="material-symbols-outlined text-primary text-lg">chevron_right</span>
       </a>
-      <a href="/deposit/" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+      <a href="{{ site_root }}/deposit/" class="flex items-center justify-between bg-surface-container-lowest rounded-DEFAULT px-4 py-4 font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors" style="box-shadow:0 2px 8px rgba(0,0,0,0.05);">
         <span>정기예금 금리 보기</span>
         <span class="material-symbols-outlined text-primary text-lg">chevron_right</span>
       </a>

@@ -21,6 +21,7 @@ ASSETS_DST = DIST / "assets"
 DATA_DIR = ROOT / "data"
 
 SITE_URL = "https://caparison1234.github.io/deposit"
+SITE_ROOT = "/deposit"  # URL prefix for GitHub Pages subdirectory
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -91,36 +92,22 @@ def build() -> None:
     )
 
     # 4. Render pages
-    render(
-        env, "index.html.j2", DIST / "index.html",
-        updated_at=updated_at,
-        cma_items=cma_items,
-        deposit_items=deposit_items,
-    )
+    ctx_common = dict(updated_at=updated_at, site_root=SITE_ROOT)
 
-    render(
-        env, "cma.html.j2", DIST / "cma" / "index.html",
-        updated_at=updated_at,
-        cma_items=cma_items,
-    )
+    render(env, "index.html.j2", DIST / "index.html",
+           **ctx_common, cma_items=cma_items, deposit_items=deposit_items)
 
-    render(
-        env, "parking.html.j2", DIST / "parking" / "index.html",
-        updated_at=updated_at,
-        parking_items=parking_items,
-    )
+    render(env, "cma.html.j2", DIST / "cma" / "index.html",
+           **ctx_common, cma_items=cma_items)
 
-    render(
-        env, "etf.html.j2", DIST / "etf" / "index.html",
-        updated_at=updated_at,
-        etf_items=etf_items,
-    )
+    render(env, "parking.html.j2", DIST / "parking" / "index.html",
+           **ctx_common, parking_items=parking_items)
 
-    render(
-        env, "deposit.html.j2", DIST / "deposit" / "index.html",
-        updated_at=updated_at,
-        deposit_items=deposit_items,
-    )
+    render(env, "etf.html.j2", DIST / "etf" / "index.html",
+           **ctx_common, etf_items=etf_items)
+
+    render(env, "deposit.html.j2", DIST / "deposit" / "index.html",
+           **ctx_common, deposit_items=deposit_items)
 
     # 5. sitemap.xml
     pages = [
