@@ -1,0 +1,101 @@
+=== 예금하기 좋은 날 — 작업 진행 기록 ===
+최종 업데이트: 2026-04-19
+
+--- 서비스 개요 ---
+- 사이트명: 예금하기 좋은 날
+- GitHub 저장소: https://github.com/caparison1234/deposit
+- GitHub Pages URL: https://caparison1234.github.io/deposit/
+- 브랜치: main (소스) / gh-pages (배포)
+- CI: GitHub Actions .github/workflows/daily-update.yml (매일 09:10 KST)
+
+--- 완료된 작업 ---
+
+[인프라]
+- 프로젝트 scaffold (build.py, Jinja2 템플릿, assets, data/)
+- GitHub Actions CI: 수집 → 빌드 → gh-pages 자동 배포
+- requirements.txt: requests, pandas, bs4, lxml, Jinja2, FinanceDataReader<2, pykrx<2
+
+[데이터 수집 스크립트]
+- scripts/collect_cma.py: KOFIA 전자공시 스크래핑 (fallback 포함)
+- scripts/collect_deposit.py: FSS 금융상품비교공시 API (FSS_API_KEY 환경변수 필요)
+- scripts/collect_parking.py: FSS API + bank_type 필드 (인터넷은행/시중은행)
+- scripts/collect_etf.py: FinanceDataReader → pykrx → fallback
+
+[페이지 (templates/ + dist/)]
+- / (홈): CMA Top3 + 예금 Top3 카드
+- /cma/: 발행어음형·RP형 필터 탭, 금리 테이블
+- /parking/: 은행유형 필터 탭, 이자 계산기
+- /etf/: ETF 카드 그리드 (4종)
+- /deposit/: 기간 필터, 세전/세후 이자 계산기
+
+[SEO]
+- 전 페이지 canonical, OG 태그 (og:title, og:description, og:url, og:site_name)
+- 홈: WebSite JSON-LD / CMA: Dataset JSON-LD
+- meta description 120자 이상
+- sitemap.xml: changefreq, priority 포함
+- 내부 링크 전체 site_root(/deposit) 기반으로 수정 → 서브경로 404 해결
+
+--- 현재 미해결 이슈 ---
+
+[CRITICAL]
+1. 실제 금리 데이터 미수집 (stale fallback 사용 중)
+   - collect_cma.py: KOFIA JS 렌더링 → requests 스크래핑 실패
+   - collect_deposit.py: FSS API key 필요 → 사업자 등록증 요구로 발급 불가
+   - collect_parking.py: 동일하게 FSS API key 필요
+   - collect_etf.py: FinanceDataReader/pykrx 미설치 환경에서 미테스트
+   → 현재 data/cma.json, data/deposit.json = 하드코딩 fallback (2026-04-18 stale)
+
+2. 실제 금리와 다름 (fallback이 현재 시장 금리와 불일치)
+   - 사용자 확인: "현재 금리가 4%가 아니다"
+
+[다음 세션에서 해결할 과제]
+- 방향 A (ECOS API): 한국은행 ECOS 개인 회원가입 → CD금리/기준금리 수집
+  → https://ecos.bok.or.kr 가입 후 API키를 GitHub Secret BOK_API_KEY 로 등록
+- 방향 B (Selenium): GitHub Actions에 headless Chrome 추가 → KOFIA/FSS 실제 스크래핑
+  → CI 빌드 시간 +5분, 복잡도 증가
+- 방향 C (수동 fallback 갱신): 현재 시장 금리로 하드코딩값 수동 업데이트
+  → 가장 빠른 임시 해결책
+
+[미구현 페이지 (product-spec 기준)]
+- /mmf/ (P1·v1): MMF 금리 비교
+- /ima/ (P1·v1): IMA 종합투자계좌 안내
+- /bill/ (P1·v1): 발행어음 금리 비교
+- /guide/* (P2·v2): 안전자산 가이드, CMA vs 파킹통장, KOFR ETF 가이드
+
+[기타 WARNING]
+- 홈·CMA 광고 슬롯 미구현 (#ad-top, #ad-mid div 없음)
+- Bottom Nav "계산기", "가이드" href="#" (미구현 페이지)
+- Adsense client ID 미등록 (수익화 준비 안됨)
+
+--- 파일 구조 ---
+deposit/
+├── build.py              # Jinja2 빌드 (SITE_ROOT="/deposit")
+├── requirements.txt
+├── data/
+│   ├── cma.json          # stale, 8 rows
+│   └── deposit.json      # stale, 10 rows
+│   (parking.json, etf.json 없음 → CI 실행 후 생성됨)
+├── scripts/
+│   ├── collect_cma.py
+│   ├── collect_deposit.py
+│   ├── collect_parking.py
+│   └── collect_etf.py
+├── templates/
+│   ├── base.html.j2
+│   ├── index.html.j2
+│   ├── cma.html.j2
+│   ├── parking.html.j2
+│   ├── etf.html.j2
+│   └── deposit.html.j2
+├── assets/style.css, main.js
+├── dist/                 # 빌드 출력 (.gitignore)
+├── docs/product-spec.md  # 전체 기능 명세
+├── error.txt             # QC 리포트 (2026-04-19)
+└── .github/workflows/daily-update.yml
+
+--- 내일 시작 방법 ---
+1. 이 파일 읽기: cat progress.txt
+2. 데이터 수집 문제 해결 방향 결정 (A/B/C 중 선택)
+3. ECOS API 키 있으면: GitHub Secrets에 BOK_API_KEY 등록 후 collect_etf.py 확장
+4. FSS API 키 있으면: GitHub Secrets에 FSS_API_KEY 등록
+5. 없으면: 방향 B (Selenium) 또는 C (수동 업데이트) 진행
