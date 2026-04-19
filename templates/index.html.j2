@@ -1,7 +1,11 @@
 {% extends "base.html.j2" %}
 
 {% block title %}예금하기 좋은 날 | 오늘의 CMA·파킹통장·단기채권 금리 랭킹{% endblock %}
-{% block meta_description %}오늘 가장 높은 CMA 금리, 파킹통장 금리, 단기채권 ETF 수익률을 한눈에 비교하세요.{% endblock %}
+{% block meta_description %}오늘 가장 높은 CMA 금리, 파킹통장 금리, 단기채권 ETF 수익률을 한눈에 비교하세요. 금융투자협회·금융감독원 공시 데이터를 매일 자동 수집하여 최신 금리 랭킹을 제공합니다. 앱 설치 없이 즉시 확인.{% endblock %}
+{% block canonical_url %}https://caparison1234.github.io/deposit/{% endblock %}
+{% block og_title %}예금하기 좋은 날 | 오늘의 CMA·파킹통장·ETF 금리 랭킹{% endblock %}
+{% block og_description %}오늘 가장 높은 CMA·파킹통장·단기채권 ETF 금리를 한눈에 비교. 매일 자동 업데이트.{% endblock %}
+{% block og_url %}https://caparison1234.github.io/deposit/{% endblock %}
 
 {% block nav_home_active %}bg-secondary-container text-primary font-bold{% endblock %}
 {% block bottom_home_active %}text-primary{% endblock %}
@@ -226,4 +230,16 @@
   </section>
 
 </main>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "예금하기 좋은 날",
+  "url": "https://caparison1234.github.io/deposit/",
+  "description": "오늘의 CMA·파킹통장·단기채권 ETF 금리 랭킹. 매일 자동 업데이트."
+}
+</script>
 {% endblock %}

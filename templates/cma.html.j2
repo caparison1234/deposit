@@ -1,7 +1,11 @@
 {% extends "base.html.j2" %}
 
 {% block title %}CMA 금리 비교 | 예금하기 좋은 날{% endblock %}
-{% block meta_description %}오늘 기준 증권사 CMA 금리 비교. 발행어음형·RP형 금리 랭킹을 한눈에 확인하세요.{% endblock %}
+{% block meta_description %}오늘 기준 증권사 CMA 금리 비교 랭킹. 발행어음형·RP형별 금리를 한눈에 확인하세요. 한국투자·미래에셋·NH·KB 등 주요 8개 증권사 CMA 금리를 매일 자동 업데이트합니다.{% endblock %}
+{% block canonical_url %}https://caparison1234.github.io/deposit/cma/{% endblock %}
+{% block og_title %}CMA 금리 비교 2026 | 발행어음·RP형 랭킹 | 예금하기 좋은 날{% endblock %}
+{% block og_description %}오늘 증권사 CMA 금리 랭킹. 발행어음형·RP형 한눈 비교, 매일 업데이트.{% endblock %}
+{% block og_url %}https://caparison1234.github.io/deposit/cma/{% endblock %}
 
 {% block nav_cma_active %}bg-secondary-container text-primary font-bold{% endblock %}
 {% block bottom_cma_active %}text-primary{% endblock %}
@@ -237,6 +241,16 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "CMA 금리 비교 랭킹",
+  "description": "국내 주요 증권사 CMA(발행어음형·RP형) 금리 랭킹. 매일 자동 업데이트.",
+  "url": "https://caparison1234.github.io/deposit/cma/",
+  "provider": { "@type": "Organization", "name": "예금하기 좋은 날" }
+}
+</script>
 <script>
   const tabs = document.querySelectorAll('.tab-btn');
   const rows = document.querySelectorAll('.rate-row');

@@ -123,13 +123,20 @@ def build() -> None:
     )
 
     # 5. sitemap.xml
-    pages = ["", "cma/", "parking/", "etf/", "deposit/"]
+    pages = [
+        ("",         "1.0", "daily"),
+        ("cma/",     "0.8", "daily"),
+        ("parking/", "0.8", "daily"),
+        ("etf/",     "0.8", "daily"),
+        ("deposit/", "0.8", "daily"),
+    ]
     sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>',
                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
-    for slug in pages:
+    for slug, priority, freq in pages:
         sitemap_lines.append(
-            f"  <url><loc>{SITE_URL}/{slug}</loc><lastmod>{today}</lastmod></url>"
+            f"  <url><loc>{SITE_URL}/{slug}</loc><lastmod>{today}</lastmod>"
+            f"<changefreq>{freq}</changefreq><priority>{priority}</priority></url>"
         )
     sitemap_lines.append("</urlset>")
     sitemap_path = DIST / "sitemap.xml"
