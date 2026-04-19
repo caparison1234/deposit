@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>정기예금 금리 비교 | 은행 예금 금리 순위 | 예금하기 좋은 날</title>
+<meta name="description" content="오늘 가장 높은 정기예금 금리를 기간별로 비교하세요. 12개월·6개월·3개월 은행 예금 금리 순위와 세전·세후 이자 계산기를 제공합니다.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://caparison1234.github.io/deposit/deposit/">
+<meta property="og:site_name" content="예금하기 좋은 날">
+<meta property="og:type" content="website">
+<meta property="og:title" content="정기예금 금리 비교 2026 | 은행 예금 금리 순위 | 예금하기 좋은 날">
+<meta property="og:description" content="오늘 은행 정기예금 최고금리 순위. 기간별 이자 계산기 포함, 매일 업데이트.">
+<meta property="og:url" content="https://caparison1234.github.io/deposit/deposit/">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#0058be",
+          "primary-container": "#2170e4",
+          "on-primary": "#ffffff",
+          "on-primary-container": "#fefcff",
+          "secondary": "#495e8a",
+          "secondary-container": "#b6ccff",
+          "on-secondary-container": "#405682",
+          "tertiary": "#aa2d32",
+          "on-tertiary": "#ffffff",
+          "surface": "#f8f9fd",
+          "surface-bright": "#f8f9fd",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f2f3f7",
+          "surface-container": "#edeef2",
+          "surface-container-high": "#e7e8ec",
+          "surface-container-highest": "#e1e2e6",
+          "on-surface": "#191c1f",
+          "on-surface-variant": "#424754",
+          "outline": "#727785",
+          "outline-variant": "#c2c6d6",
+          "background": "#f8f9fd",
+        },
+        borderRadius: {
+          "DEFAULT": "1rem",
+          "sm": "0.5rem",
+          "md": "1.5rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px",
+        },
+        fontFamily: {
+          sans: ["Pretendard", "sans-serif"],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Pretendard', sans-serif; background-color: #f8f9fd; color: #191c1f; min-height: 100dvh; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .icon-filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .tab-btn { transition: background 0.15s, color 0.15s; }
+  .accordion-body { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+  .accordion-body.open { max-height: 300px; }
+  .chevron { transition: transform 0.25s; }
+  .chevron.open { transform: rotate(180deg); }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "홈", "item": "/"},
+    {"@type": "ListItem", "position": 2, "name": "정기예금 금리 비교", "item": "/deposit/"}
+  ]
+}
+</script>
+
+</head>
+<body class="bg-background pb-28">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-[#f8f9fd]/80 backdrop-blur-md flex justify-between items-center px-6 py-4">
+  <div class="flex items-center gap-3">
+    <button onclick="toggleNav()" aria-label="메뉴 열기">
+      <span class="material-symbols-outlined text-primary">menu</span>
+    </button>
+    <a href="/deposit/" class="text-primary font-black tracking-tight text-lg">예금하기 좋은 날</a>
+  </div>
+  <time class="text-xs text-on-surface-variant font-medium">2026-04-19 15:29 KST 기준</time>
+</header>
+
+<!-- Nav Overlay -->
+<div id="nav-overlay" class="fixed inset-0 z-40 bg-black/30 hidden" onclick="toggleNav()"></div>
+<nav id="nav-drawer" class="fixed top-0 left-0 h-full w-64 z-50 bg-surface-container-lowest shadow-2xl -translate-x-full transition-transform duration-300 pt-16 px-5">
+  <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-4">메뉴</p>
+  <ul class="space-y-1">
+    <li><a href="/deposit/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">home</span>홈</a></li>
+    <li><a href="/deposit/cma/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">trending_up</span>CMA 금리</a></li>
+    <li><a href="/deposit/parking/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">account_balance</span>파킹통장</a></li>
+    <li><a href="/deposit/etf/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">candlestick_chart</span>ETF 시세</a></li>
+    <li><a href="/deposit/deposit/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-secondary-container text-primary font-bold text-sm"><span class="material-symbols-outlined text-lg">savings</span>예금 금리</a></li>
+  </ul>
+</nav>
+
+
+<main class="pt-20 max-w-2xl mx-auto">
+
+  <!-- Breadcrumb -->
+  <div class="px-6 pt-3 pb-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+    <a href="/deposit/" class="hover:text-primary transition-colors font-medium">홈</a>
+    <span class="material-symbols-outlined text-sm">chevron_right</span>
+    <span class="text-on-surface font-semibold">정기예금 금리 비교</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="px-6 pt-4 pb-6">
+    <p class="text-tertiary font-bold text-xs tracking-widest mb-2">FIXED DEPOSIT RATE RANKING</p>
+    <h1 class="text-2xl font-extrabold text-on-surface leading-tight tracking-tight mb-1">
+      정기예금 금리 비교
+    </h1>
+    <p class="text-sm text-on-surface-variant font-medium mb-5">2026-04-19 15:29 KST 기준 · 10개 상품</p>
+
+    <!-- Filter Tabs -->
+    <div class="flex gap-2 flex-wrap">
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-primary text-white" data-filter="all">전체</button>
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-filter="12">12개월</button>
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-filter="6">6개월</button>
+      <button class="tab-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-filter="3">3개월</button>
+    </div>
+  </section>
+
+  <!-- Ad Slot Top -->
+  <section class="px-6 mb-6">
+    <div id="ad-top" class="ad-slot w-full min-h-[90px] bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40" data-slot="slot-top">
+      <!-- Adsense slot-top: insert data-ad-client / data-ad-slot here -->
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- Rate Table -->
+  <section class="px-6 mb-6">
+    <div class="bg-surface-container-lowest rounded-md overflow-hidden" style="box-shadow:0 4px 24px rgba(0,88,190,0.07);">
+
+      <!-- Header Row -->
+      <div class="flex items-center px-5 py-3 bg-surface-container-low gap-2">
+        <span class="w-7 shrink-0 text-xs font-bold text-on-surface-variant">순위</span>
+        <span class="flex-1 text-xs font-bold text-on-surface-variant ml-2">은행명 · 상품명</span>
+        <span class="w-12 text-right text-xs font-bold text-on-surface-variant">기본금리</span>
+        <span class="w-14 text-right text-xs font-bold text-on-surface-variant ml-1">최고금리</span>
+        <span class="w-12 text-right text-xs font-bold text-on-surface-variant hidden sm:block ml-1">기간</span>
+        <span class="w-14 text-right text-xs font-bold text-on-surface-variant hidden sm:block ml-1">가입채널</span>
+      </div>
+
+      
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent"
+             data-period="12">
+          <span class="text-lg font-black text-primary w-7 shrink-0">1</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">한국카카오은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">카카오뱅크 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.5<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-primary ml-1">4.2<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-surface-container-lowest"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">2</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">케이뱅크</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">코드K 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.45<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">4.15<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-[#f9fafb]"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">3</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">토스뱅크</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">토스뱅크 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.4<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">4.1<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-surface-container-lowest"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">4</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">KB국민은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">KB Star 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.7<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">4.05<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-[#f9fafb]"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">5</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">신한은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">쏠편한 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.65<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">4.0<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-surface-container-lowest"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">6</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">하나은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">하나의 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.6<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">3.95<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-[#f9fafb]"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">7</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">우리은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">WON 정기예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.55<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">3.9<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-surface-container-lowest"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">8</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">NH농협은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">NH왈츠회전예금 II</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.5<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">3.85<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-[#f9fafb]"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">9</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">IBK기업은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">IBK D-Day 통장</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.45<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">3.8<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷/앱</span>
+        </div>
+        <div class="h-px bg-outline-variant/20 mx-5"></div>
+        
+        
+        <div class="rate-row flex items-center px-5 py-4 gap-2 bg-surface-container-lowest"
+             data-period="12">
+          <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">10</span>
+          <div class="flex-1 min-w-0 ml-2">
+            <p class="font-bold text-on-surface text-sm truncate">SC제일은행</p>
+            <p class="text-xs text-on-surface-variant mt-0.5 truncate">e-그린세이브 예금</p>
+          </div>
+          <span class="w-12 text-right text-sm font-semibold text-on-surface-variant">3.3<span class="text-xs">%</span></span>
+          <span class="w-14 text-right text-xl font-black text-on-surface ml-1">3.75<span class="text-sm font-bold">%</span></span>
+          <span class="w-12 text-right hidden sm:block ml-1">
+            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">12개월</span>
+          </span>
+          <span class="w-14 text-right text-xs text-on-surface-variant font-semibold hidden sm:block ml-1">인터넷</span>
+        </div>
+        
+        
+      
+
+      <!-- Table footnote -->
+      <div class="px-5 py-3 bg-surface-container-low">
+        <p class="text-xs text-on-surface-variant">* 최고금리는 우대조건 충족 시 기준이며, 기본금리와 다를 수 있습니다. 모든 상품은 예금자보호법에 의해 1인당 최고 5천만 원까지 보호됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tax Calculator -->
+  <section class="px-6 mb-6">
+    <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-3">이자 계산기 (이자소득세 15.4% 적용)</p>
+    <div class="bg-surface-container-lowest rounded-md px-5 py-5" style="box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-bold text-on-surface mb-2" for="dep-amount">예치 금액 (원)</label>
+          <input id="dep-amount" type="number" min="0" step="100000" placeholder="예: 10000000"
+                 class="w-full border border-outline-variant rounded-DEFAULT px-4 py-3 text-sm font-semibold text-on-surface bg-surface focus:outline-none focus:border-primary transition-colors"/>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-on-surface mb-2" for="dep-rate">연 금리 (%)</label>
+          <input id="dep-rate" type="number" min="0" max="20" step="0.01" placeholder="예: 3.50"
+                 class="w-full border border-outline-variant rounded-DEFAULT px-4 py-3 text-sm font-semibold text-on-surface bg-surface focus:outline-none focus:border-primary transition-colors"/>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-bold text-on-surface mb-2" for="dep-period">예치 기간</label>
+        <div class="flex gap-2 flex-wrap" id="period-selector">
+          <button class="period-btn px-4 py-2 rounded-full text-sm font-bold bg-primary text-white" data-months="12">12개월</button>
+          <button class="period-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-months="6">6개월</button>
+          <button class="period-btn px-4 py-2 rounded-full text-sm font-bold bg-surface-container text-on-surface-variant" data-months="3">3개월</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-surface-container rounded-DEFAULT px-4 py-4">
+          <p class="text-xs font-bold text-on-surface-variant mb-1">세전 이자</p>
+          <p id="before-tax" class="text-xl font-black text-on-surface">—원</p>
+        </div>
+        <div class="bg-primary/5 border border-primary/20 rounded-DEFAULT px-4 py-4">
+          <p class="text-xs font-bold text-primary mb-1">세후 이자 (15.4% 공제)</p>
+          <p id="after-tax" class="text-xl font-black text-primary">—원</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Slot Mid -->
+  <section class="px-6 mb-6">
+    <div id="ad-mid" class="ad-slot w-full min-h-[250px] bg-surface-container rounded-DEFAULT flex items-center justify-center border border-dashed border-outline-variant/40" data-slot="slot-mid">
+      <!-- Adsense slot-mid: insert data-ad-client / data-ad-slot here -->
+      <span class="text-xs text-on-surface-variant font-medium tracking-widest">광 고</span>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="px-6 mb-4">
+    <p class="text-xs text-on-surface-variant/60 leading-relaxed">본 사이트의 금리 정보는 자동 수집된 참고 자료로, 투자 권유 또는 금융 상품 추천이 아닙니다. 실제 가입 전 각 금융사 공식 사이트를 반드시 확인하세요. © 2026 예금하기 좋은 날</p>
+  </section>
+
+</main>
+
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 backdrop-blur-xl rounded-t-[2rem] shadow-[0_-8px_30px_rgba(0,88,190,0.08)]">
+  <a href="/deposit/" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined text-xl">home</span>
+    <span class="text-[11px] font-semibold mt-0.5">홈</span>
+  </a>
+  <a href="/deposit/cma/" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined text-xl">analytics</span>
+    <span class="text-[11px] font-semibold mt-0.5">금리비교</span>
+  </a>
+  <a href="#" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined text-xl">calculate</span>
+    <span class="text-[11px] font-semibold mt-0.5">계산기</span>
+  </a>
+  <a href="#" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined text-xl">menu_book</span>
+    <span class="text-[11px] font-semibold mt-0.5">가이드</span>
+  </a>
+</nav>
+
+<script>
+  function toggleNav() {
+    const drawer = document.getElementById('nav-drawer');
+    const overlay = document.getElementById('nav-overlay');
+    const isOpen = !drawer.classList.contains('-translate-x-full');
+    drawer.classList.toggle('-translate-x-full', isOpen);
+    overlay.classList.toggle('hidden', isOpen);
+  }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const chevron = btn.querySelector('.chevron');
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) {
+      body.classList.add('open');
+      chevron.classList.add('open');
+    }
+  }
+</script>
+
+<script>
+  // Filter tabs
+  const tabs = document.querySelectorAll('.tab-btn');
+  const rows = document.querySelectorAll('.rate-row');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-white');
+        t.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      tab.classList.add('bg-primary', 'text-white');
+      tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+
+      const filter = tab.dataset.filter;
+      let rank = 1;
+      rows.forEach(row => {
+        const show = filter === 'all' || row.dataset.period === filter;
+        row.style.display = show ? 'flex' : 'none';
+        if (show) {
+          row.querySelector('span:first-child').textContent = rank++;
+        }
+      });
+    });
+  });
+
+  // Tax calculator
+  let selectedMonths = 12;
+
+  document.querySelectorAll('.period-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.period-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-white');
+        b.classList.add('bg-surface-container', 'text-on-surface-variant');
+      });
+      btn.classList.add('bg-primary', 'text-white');
+      btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      selectedMonths = parseInt(btn.dataset.months, 10);
+      calcTax();
+    });
+  });
+
+  function calcTax() {
+    const amount = parseFloat(document.getElementById('dep-amount').value) || 0;
+    const rate = parseFloat(document.getElementById('dep-rate').value) || 0;
+    if (amount > 0 && rate > 0) {
+      const beforeTax = Math.floor(amount * (rate / 100) * (selectedMonths / 12));
+      const afterTax = Math.floor(beforeTax * (1 - 0.154));
+      document.getElementById('before-tax').textContent = beforeTax.toLocaleString('ko-KR') + '원';
+      document.getElementById('after-tax').textContent = afterTax.toLocaleString('ko-KR') + '원';
+    } else {
+      document.getElementById('before-tax').textContent = '—원';
+      document.getElementById('after-tax').textContent = '—원';
+    }
+  }
+
+  document.getElementById('dep-amount').addEventListener('input', calcTax);
+  document.getElementById('dep-rate').addEventListener('input', calcTax);
+</script>
+
+</body>
+</html>

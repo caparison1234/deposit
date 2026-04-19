@@ -4,8 +4,14 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CMA 금리 비교 | 예금하기 좋은 날</title>
-<meta name="description" content="오늘 기준 증권사 CMA 금리 비교. 발행어음형·RP형 금리 랭킹을 한눈에 확인하세요.">
+<meta name="description" content="오늘 기준 증권사 CMA 금리 비교 랭킹. 발행어음형·RP형별 금리를 한눈에 확인하세요. 한국투자·미래에셋·NH·KB 등 주요 8개 증권사 CMA 금리를 매일 자동 업데이트합니다.">
 <meta name="robots" content="index, follow">
+<link rel="canonical" href="https://caparison1234.github.io/deposit/cma/">
+<meta property="og:site_name" content="예금하기 좋은 날">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CMA 금리 비교 2026 | 발행어음·RP형 랭킹 | 예금하기 좋은 날">
+<meta property="og:description" content="오늘 증권사 CMA 금리 랭킹. 발행어음형·RP형 한눈 비교, 매일 업데이트.">
+<meta property="og:url" content="https://caparison1234.github.io/deposit/cma/">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
@@ -71,9 +77,9 @@
     <button onclick="toggleNav()" aria-label="메뉴 열기">
       <span class="material-symbols-outlined text-primary">menu</span>
     </button>
-    <a href="/" class="text-primary font-black tracking-tight text-lg">예금하기 좋은 날</a>
+    <a href="/deposit/" class="text-primary font-black tracking-tight text-lg">예금하기 좋은 날</a>
   </div>
-  <time class="text-xs text-on-surface-variant font-medium">2026-04-19 15:28 KST 기준</time>
+  <time class="text-xs text-on-surface-variant font-medium">2026-04-19 15:29 KST 기준</time>
 </header>
 
 <!-- Nav Overlay -->
@@ -81,11 +87,11 @@
 <nav id="nav-drawer" class="fixed top-0 left-0 h-full w-64 z-50 bg-surface-container-lowest shadow-2xl -translate-x-full transition-transform duration-300 pt-16 px-5">
   <p class="text-xs font-bold text-on-surface-variant tracking-widest mb-4">메뉴</p>
   <ul class="space-y-1">
-    <li><a href="/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">home</span>홈</a></li>
-    <li><a href="/cma/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-secondary-container text-primary font-bold text-sm"><span class="material-symbols-outlined text-lg">trending_up</span>CMA 금리</a></li>
-    <li><a href="#" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold text-sm hover:bg-surface-container-low"><span class="material-symbols-outlined text-lg">account_balance</span>파킹통장</a></li>
-    <li><a href="#" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold text-sm hover:bg-surface-container-low"><span class="material-symbols-outlined text-lg">candlestick_chart</span>ETF 시세</a></li>
-    <li><a href="#" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold text-sm hover:bg-surface-container-low"><span class="material-symbols-outlined text-lg">savings</span>예금 금리</a></li>
+    <li><a href="/deposit/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">home</span>홈</a></li>
+    <li><a href="/deposit/cma/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT bg-secondary-container text-primary font-bold text-sm"><span class="material-symbols-outlined text-lg">trending_up</span>CMA 금리</a></li>
+    <li><a href="/deposit/parking/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">account_balance</span>파킹통장</a></li>
+    <li><a href="/deposit/etf/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">candlestick_chart</span>ETF 시세</a></li>
+    <li><a href="/deposit/deposit/" class="flex items-center gap-3 px-4 py-3 rounded-DEFAULT text-on-surface-variant font-semibold hover:bg-surface-container-low text-sm"><span class="material-symbols-outlined text-lg">savings</span>예금 금리</a></li>
   </ul>
 </nav>
 
@@ -94,7 +100,7 @@
 
   <!-- Breadcrumb -->
   <div class="px-6 pt-3 pb-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
-    <a href="/" class="hover:text-primary transition-colors font-medium">홈</a>
+    <a href="/deposit/" class="hover:text-primary transition-colors font-medium">홈</a>
     <span class="material-symbols-outlined text-sm">chevron_right</span>
     <span class="text-on-surface font-semibold">CMA 금리 비교</span>
   </div>
@@ -105,7 +111,7 @@
     <h1 class="text-2xl font-extrabold text-on-surface leading-tight tracking-tight mb-1">
       증권사 CMA 금리 비교
     </h1>
-    <p class="text-sm text-on-surface-variant font-medium mb-5">2026-04-19 15:28 KST 기준 · 8개 증권사</p>
+    <p class="text-sm text-on-surface-variant font-medium mb-5">2026-04-19 15:29 KST 기준 · 8개 증권사</p>
 
     <!-- Filter Tabs -->
     <div class="flex gap-2">
@@ -133,12 +139,12 @@
         
         
         <div class="rate-row flex items-center px-5 py-4 border-l-4 border-primary bg-gradient-to-r from-primary/5 to-transparent"
-             data-type="rp">
+             data-type="bill">
           <span class="text-lg font-black text-primary w-7 shrink-0">1</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">한국투자증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
-              RP형 ·
+              발행어음형 ·
               
                 
                 <span class="text-tertiary font-semibold">▲ 0.10%</span>
@@ -149,7 +155,7 @@
           <span class="w-14 text-right text-xl font-black text-primary">4.35<span class="text-sm font-bold">%</span></span>
           <span class="w-16 text-right ml-2 hidden sm:block">
             
-            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span>
+            <span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span>
             
           </span>
         </div>
@@ -162,7 +168,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">2</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">미래에셋증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -183,12 +189,12 @@
         
         
         <div class="rate-row flex items-center px-5 py-4 bg-[#f9fafb]"
-             data-type="rp">
+             data-type="bill">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">3</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">NH투자증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
-              RP형 ·
+              발행어음형 ·
               
                 
                 <span class="text-outline font-semibold">▼ 0.05%</span>
@@ -199,7 +205,7 @@
           <span class="w-14 text-right text-xl font-black text-on-surface">4.18<span class="text-sm font-bold">%</span></span>
           <span class="w-16 text-right ml-2 hidden sm:block">
             
-            <span class="text-xs bg-surface-container text-on-surface-variant font-bold px-2 py-1 rounded-full">RP형</span>
+            <span class="text-xs bg-secondary-container text-on-secondary-container font-bold px-2 py-1 rounded-full">발행어음</span>
             
           </span>
         </div>
@@ -212,7 +218,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">4</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">KB증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -236,7 +242,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">5</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">삼성증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -262,7 +268,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">6</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">신한투자증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -286,7 +292,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">7</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">키움증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -310,7 +316,7 @@
              data-type="rp">
           <span class="text-lg font-black text-on-surface-variant w-7 shrink-0">8</span>
           <div class="flex-1 min-w-0 ml-3">
-            <p class="font-bold text-on-surface text-sm"></p>
+            <p class="font-bold text-on-surface text-sm">대신증권</p>
             <p class="text-xs text-on-surface-variant mt-0.5">
               RP형 ·
               
@@ -406,11 +412,11 @@
 
 <!-- Bottom Nav -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 backdrop-blur-xl rounded-t-[2rem] shadow-[0_-8px_30px_rgba(0,88,190,0.08)]">
-  <a href="/" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
+  <a href="/deposit/" class="flex flex-col items-center text-on-surface-variant hover:text-primary transition-colors">
     <span class="material-symbols-outlined text-xl">home</span>
     <span class="text-[11px] font-semibold mt-0.5">홈</span>
   </a>
-  <a href="/cma/" class="flex flex-col items-center text-primary">
+  <a href="/deposit/cma/" class="flex flex-col items-center text-primary">
     <span class="material-symbols-outlined icon-filled text-xl">analytics</span>
     <span class="text-[11px] font-bold mt-0.5">금리비교</span>
   </a>
@@ -446,6 +452,16 @@
   }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "CMA 금리 비교 랭킹",
+  "description": "국내 주요 증권사 CMA(발행어음형·RP형) 금리 랭킹. 매일 자동 업데이트.",
+  "url": "https://caparison1234.github.io/deposit/cma/",
+  "provider": { "@type": "Organization", "name": "예금하기 좋은 날" }
+}
+</script>
 <script>
   const tabs = document.querySelectorAll('.tab-btn');
   const rows = document.querySelectorAll('.rate-row');
